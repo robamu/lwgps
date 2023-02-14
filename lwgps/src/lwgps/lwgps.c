@@ -85,6 +85,9 @@ prv_parse_number(lwgps_t* gh, const char* t) {
     }
     for (; t != NULL && *t == ' '; ++t) {} /* Strip leading spaces */
 
+    if (t== NULL) {
+        return 0;
+    }
     minus = (*t == '-' ? (++t, 1) : 0);
     for (; t != NULL && CIN(*t); ++t) {
         res = 10 * res + CTN(*t);
@@ -107,6 +110,10 @@ prv_parse_float_number(lwgps_t* gh, const char* t) {
         t = gh->p.term_str;
     }
     for (; t != NULL && *t == ' '; ++t) {} /* Strip leading spaces */
+
+    if (t == NULL) {
+      return 0.0;
+    }
 
     if (*t == '-') { /* Check sign */
         sign = -1;
